@@ -1,8 +1,8 @@
-import "express-session";
+import { User } from "../src/models";
 
 declare module "express-session" {
 	interface SessionData {
-		user: any;
+		user: User;
 		tokens: {
 			access_token: string;
 			refresh_token: string;

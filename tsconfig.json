@@ -9,6 +9,6 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"sourceMap": true,
-		"typeRoots": ["./typings"]
+		"typeRoots": ["./types"]
 	}
 }
