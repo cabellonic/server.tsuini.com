@@ -1,4 +1,5 @@
 export const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
+export const SPOTIFY_AUTHORIZE_URL = "https://accounts.spotify.com/authorize?";
 export const STATE_KEY = "spotify_auth_state";
 
 export const scopes = [
