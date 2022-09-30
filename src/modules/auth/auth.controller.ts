@@ -12,6 +12,7 @@ export const getMe = async (req: Request, res: Response, _next: NextFunction) =>
 	const user = req.session.user;
 	const tokens = req.session.tokens;
 	if (user && tokens) return res.json({ ...user });
+	return res.send(null);
 };
 
 export const login = async (req: Request, res: Response, _next: NextFunction) => {
