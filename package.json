@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "ts-node src/index.ts",
-		"dev": "nodemon",
+		"dev": "nodemon --exec ts-node -T src/index.ts",
 		"typeorm": "typeorm-ts-node-commonjs"
 	},
 	"license": "MIT",

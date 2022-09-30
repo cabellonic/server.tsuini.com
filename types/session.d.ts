@@ -1,3 +1,4 @@
+import "express-session";
 import { User } from "../src/models";
 
 declare module "express-session" {
