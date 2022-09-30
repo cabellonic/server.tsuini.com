@@ -6,7 +6,7 @@ import * as authConfig from "./auth.config";
 import * as authService from "./auth.service";
 import * as userService from "../user/user.service";
 // Utils
-import { generateRandomString } from "../../utils";
+import * as utils from "../../utils";
 
 export const getMe = async (req: Request, res: Response, _next: NextFunction) => {
 	const user = req.session.user;
@@ -16,7 +16,7 @@ export const getMe = async (req: Request, res: Response, _next: NextFunction) =>
 };
 
 export const login = async (req: Request, res: Response, _next: NextFunction) => {
-	const state = generateRandomString(16);
+	const state = utils.generateRandomString(16);
 	const scope = authConfig.scopes.join(" ");
 
 	res.cookie(authConfig.STATE_KEY, state);
@@ -49,16 +49,7 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 
 	res.clearCookie(authConfig.STATE_KEY);
 
-	const config = {
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/x-www-form-urlencoded",
-		},
-		auth: {
-			username: process.env.SPOTIFY_CLIENT_ID,
-			password: process.env.SPOTIFY_CLIENT_SECRET,
-		},
-	};
+	const config = utils.getAxiosConfig({ withSpotifyAuth: true, urlEncoded: true });
 
 	const data = new URLSearchParams({
 		grant_type: "authorization_code",
