@@ -15,14 +15,14 @@ export const getMe = async (req: Request, res: Response, _next: NextFunction) =>
 	return res.send(null);
 };
 
-export const login = async (req: Request, res: Response, _next: NextFunction) => {
+export const login = async (_req: Request, res: Response, _next: NextFunction) => {
 	const state = utils.generateRandomString(16);
 	const scope = authConfig.scopes.join(" ");
 
 	res.cookie(authConfig.STATE_KEY, state);
 
 	const authUrl =
-		"https://accounts.spotify.com/authorize?" +
+		authConfig.SPOTIFY_AUTHORIZE_URL +
 		new URLSearchParams({
 			response_type: "code",
 			client_id: process.env.SPOTIFY_CLIENT_ID,
@@ -30,6 +30,7 @@ export const login = async (req: Request, res: Response, _next: NextFunction) =>
 			redirect_uri: process.env.SPOTIFY_CALLBACK_URL,
 			state: state,
 		});
+
 	return res.json({ authUrl });
 };
 
@@ -64,8 +65,6 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 		const userFromSpotify = await authService.getUserFromSpotify(access_token);
 		let userFromDB = await userService.getUserByCriteria({ spotifyId: userFromSpotify.spotifyId });
 		if (!userFromDB) userFromDB = await userService.createUser(userFromSpotify);
-
-		if (!userFromDB) throw new Error("User not found");
 
 		req.session.user = userFromDB;
 		req.session.tokens = {
