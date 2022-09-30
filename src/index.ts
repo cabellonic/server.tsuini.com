@@ -1,15 +1,15 @@
 import express from "express";
+import session from "express-session";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import { TypeormStore } from "connect-typeorm";
-
 // TypeORM Data Source
 import { AppDataSource } from "./data-source";
+import { TypeormStore } from "connect-typeorm";
 // Routes
 import authRoutes from "./modules/auth/auth.routes";
 import userRoutes from "./modules/user/user.routes";
-import session from "express-session";
+import albumRoutes from "./modules/album/album.routes";
 // Models
 import { Session } from "./models";
 
@@ -47,5 +47,6 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/albums", albumRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT || 3000}`));
