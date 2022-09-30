@@ -45,3 +45,5 @@ export class User {
 	@DeleteDateColumn()
 	deleted_at?: Date;
 }
+
+export type NewUserEntry = Omit<User, "id" | "created_at" | "updated_at">;

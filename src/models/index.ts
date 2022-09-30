@@ -1,8 +1,3 @@
-import { User } from "../modules/user/user.model";
-export { Session } from "../modules/session/session.model";
-
-export { Song, NewSongEntry } from "../modules/song/song.model";
-
-export { User };
-
-export type NewUserEntry = Omit<User, "id" | "created_at" | "updated_at">;
+export * from "../modules/session/session.model";
+export * from "../modules/user/user.model";
+export * from "../modules/song/song.model";
