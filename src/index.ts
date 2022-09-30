@@ -9,6 +9,7 @@ import { TypeormStore } from "connect-typeorm";
 // Routes
 import authRoutes from "./modules/auth/auth.routes";
 import userRoutes from "./modules/user/user.routes";
+import songRoutes from "./modules/song/song.routes";
 import albumRoutes from "./modules/album/album.routes";
 // Models
 import { Session } from "./models";
@@ -47,6 +48,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT || 3000}`));
