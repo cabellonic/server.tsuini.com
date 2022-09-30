@@ -5,6 +5,8 @@ import { AppDataSource } from "../../data-source";
 import { Song, NewSongEntry } from "../../models";
 // Adapter
 import * as songAdapter from "./song.adapter";
+// Utils
+import * as utils from "../../utils";
 
 const songRepository = AppDataSource.getRepository(Song);
 
@@ -29,11 +31,7 @@ export const createSong = async (song: NewSongEntry) => {
 };
 
 export const getSongFromSpotify = async (accessToken: string, id: string) => {
-	const config = {
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-		},
-	};
+	const config = utils.getAxiosConfig({ accessToken });
 
 	const { data } = await axios.get(`https://api.spotify.com/v1/tracks/${id}`, config);
 	return songAdapter.adaptSongFromSpotify(data);
