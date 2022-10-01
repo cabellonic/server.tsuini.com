@@ -10,6 +10,6 @@ export const getSongs = async (_req: Request, res: Response, _next: NextFunction
 export const getSongByID = async (req: Request, res: Response, _next: NextFunction) => {
 	const { id } = req.params;
 	const song = await songService.getSongByID(id);
-	if (!song) return res.end();
+	if (!song) return res.status(404).end();
 	return res.json(song);
 };
