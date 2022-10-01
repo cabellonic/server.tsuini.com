@@ -1,6 +1,6 @@
 import axios from "axios";
 // Adapter
-import * as authAdapter from "./auth.adapters";
+import * as authAdapter from "./auth.adapter";
 // Utils
 import * as utils from "../../utils";
 
