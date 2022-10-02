@@ -10,9 +10,8 @@ import * as utils from "../../utils";
 
 export const getMe = async (req: Request, res: Response, _next: NextFunction) => {
 	const user = req.session.user;
-	const tokens = req.session.tokens;
-	if (user && tokens) return res.json({ ...user });
-	return res.send(null);
+	if (user) return res.json(user);
+	return res.end();
 };
 
 export const login = async (_req: Request, res: Response, _next: NextFunction) => {
@@ -77,4 +76,28 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 	}
 
 	return res.redirect(process.env.CLIENT_URL!);
+};
+
+export const refresh = async (req: Request, res: Response, _next: NextFunction) => {
+	const refresh_token = req.session.tokens?.refresh_token;
+	if (!refresh_token) return res.redirect("/error/state_mismatch");
+
+	const config = utils.getAxiosConfig({ withSpotifyAuth: true, urlEncoded: true });
+
+	const data = new URLSearchParams({
+		grant_type: "refresh_token",
+		refresh_token: refresh_token,
+	});
+
+	try {
+		const response = await axios.post(authConfig.SPOTIFY_TOKEN_URL, data, config);
+		const { access_token, expires_in } = response.data;
+		req.session.tokens.access_token = access_token;
+		req.session.tokens.expires_in = expires_in;
+	} catch (error) {
+		console.log(error);
+		return res.redirect("/error/state_mismatch");
+	}
+
+	return res.status(200).end();
 };
