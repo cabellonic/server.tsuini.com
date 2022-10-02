@@ -94,10 +94,10 @@ export const refresh = async (req: Request, res: Response, _next: NextFunction) 
 		const { access_token, expires_in } = response.data;
 		req.session.tokens.access_token = access_token;
 		req.session.tokens.expires_in = expires_in;
+
+		return res.json({ accessToken: access_token, expirationDate: Date.now() + expires_in * 1000 });
 	} catch (error) {
 		console.log(error);
 		return res.redirect("/error/state_mismatch");
 	}
-
-	return res.status(200).end();
 };
