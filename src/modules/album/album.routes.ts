@@ -1,10 +1,12 @@
 import express from 'express';
 // Services
 import * as albumController from './album.controller';
+// Utils
+import { catchAsyncErrors } from '../../utils';
 
 const router = express.Router();
 
-router.get('/', albumController.getAlbums);
-router.get('/:id', albumController.getAlbumByID);
+router.get('/', catchAsyncErrors(albumController.getAlbums));
+router.get('/:id', catchAsyncErrors(albumController.getAlbumByID));
 
 export default router;
