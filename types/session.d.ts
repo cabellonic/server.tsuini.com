@@ -1,7 +1,7 @@
-import "express-session";
-import { User } from "../src/models";
+import 'express-session';
+import { User } from '../src/models';
 
-declare module "express-session" {
+declare module 'express-session' {
 	interface SessionData {
 		user: User;
 		tokens: {

@@ -1,12 +1,12 @@
-import axios from "axios";
-import { FindOptionsWhere } from "typeorm";
-import { AppDataSource } from "../../data-source";
+import axios from 'axios';
+import { FindOptionsWhere } from 'typeorm';
+import { AppDataSource } from '../../data-source';
 // Models
-import { Song, NewSongEntry } from "../../models";
+import { Song, NewSongEntry } from '../../models';
 // Adapter
-import * as songAdapter from "./song.adapter";
+import * as songAdapter from './song.adapter';
 // Utils
-import * as utils from "../../utils";
+import * as utils from '../../utils';
 
 const songRepository = AppDataSource.getRepository(Song);
 

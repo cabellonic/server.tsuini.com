@@ -1,8 +1,8 @@
-import "reflect-metadata";
-import * as dotenv from "dotenv";
-import { DataSource } from "typeorm";
+import 'reflect-metadata';
+import * as dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
 // Entities
-import { User, Session, Song, Album, Artist } from "./models";
+import { User, Session, Song, Album, Artist } from './models';
 
 dotenv.config();
 

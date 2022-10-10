@@ -1,12 +1,12 @@
-import axios from "axios";
-import { FindOptionsWhere } from "typeorm";
-import { AppDataSource } from "../../data-source";
+import axios from 'axios';
+import { FindOptionsWhere } from 'typeorm';
+import { AppDataSource } from '../../data-source';
 // Models
-import { Album, NewAlbumEntry } from "./album.model";
+import { Album, NewAlbumEntry } from './album.model';
 // Adapter
-import * as albumAdapter from "./album.adapter";
+import * as albumAdapter from './album.adapter';
 // Utils
-import * as utils from "../../utils";
+import * as utils from '../../utils';
 
 const albumRepository = AppDataSource.getRepository(Album);
 
@@ -21,7 +21,7 @@ export const getAlbumByID = async (id: string): Promise<Album | null> => {
 };
 
 export const getAlbumsByCriteria = async (
-	criteria: FindOptionsWhere<Album> | FindOptionsWhere<Album>[]
+	criteria: FindOptionsWhere<Album> | FindOptionsWhere<Album>[],
 ): Promise<Array<Album>> => {
 	const albums = await albumRepository.find({ where: criteria });
 	return albums;

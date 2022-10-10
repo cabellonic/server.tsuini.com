@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
 @Entity()
 export class Album {
@@ -26,13 +26,13 @@ export class Album {
 	@Column()
 	releaseDate: string;
 
-	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;
 
 	@UpdateDateColumn({
-		type: "timestamp",
-		default: () => "CURRENT_TIMESTAMP(6)",
-		onUpdate: "CURRENT_TIMESTAMP(6)",
+		type: 'timestamp',
+		default: () => 'CURRENT_TIMESTAMP(6)',
+		onUpdate: 'CURRENT_TIMESTAMP(6)',
 	})
 	updated_at: Date;
 
@@ -40,4 +40,4 @@ export class Album {
 	deleted_at?: Date;
 }
 
-export type NewAlbumEntry = Omit<Album, "created_at" | "updated_at">;
+export type NewAlbumEntry = Omit<Album, 'created_at' | 'updated_at'>;

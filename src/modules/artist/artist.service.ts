@@ -1,12 +1,12 @@
-import axios from "axios";
-import { FindOptionsWhere } from "typeorm";
-import { AppDataSource } from "../../data-source";
+import axios from 'axios';
+import { FindOptionsWhere } from 'typeorm';
+import { AppDataSource } from '../../data-source';
 // Models
-import { Artist, NewArtistEntry } from "../../models";
+import { Artist, NewArtistEntry } from '../../models';
 // Adapter
-import * as artistAdapter from "./artist.adapter";
+import * as artistAdapter from './artist.adapter';
 // Utils
-import * as utils from "../../utils";
+import * as utils from '../../utils';
 
 const artistRepository = AppDataSource.getRepository(Artist);
 

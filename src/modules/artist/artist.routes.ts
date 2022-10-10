@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express';
 // Controllers
-import * as artistController from "./artist.controller";
+import * as artistController from './artist.controller';
 
 const router = express.Router();
 
-router.get("/", artistController.getArtists);
-router.get("/:id", artistController.getArtistByID);
+router.get('/', artistController.getArtists);
+router.get('/:id', artistController.getArtistByID);
 
 export default router;

@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 // Services
-import * as userService from "./user.service";
+import * as userService from './user.service';
 
 export const getUsers = async (req: Request, res: Response, _next: NextFunction) => {
 	const users = await userService.getUsers();

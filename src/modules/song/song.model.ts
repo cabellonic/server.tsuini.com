@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Song {
@@ -20,13 +20,13 @@ export class Song {
 	@Column()
 	trackNumber: number;
 
-	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;
 
 	@UpdateDateColumn({
-		type: "timestamp",
-		default: () => "CURRENT_TIMESTAMP(6)",
-		onUpdate: "CURRENT_TIMESTAMP(6)",
+		type: 'timestamp',
+		default: () => 'CURRENT_TIMESTAMP(6)',
+		onUpdate: 'CURRENT_TIMESTAMP(6)',
 	})
 	updated_at: Date;
 
@@ -34,4 +34,4 @@ export class Song {
 	deleted_at: Date;
 }
 
-export type NewSongEntry = Omit<Song, "created_at" | "updated_at" | "deleted_at">;
+export type NewSongEntry = Omit<Song, 'created_at' | 'updated_at' | 'deleted_at'>;

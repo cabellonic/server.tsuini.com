@@ -1,6 +1,6 @@
-import { NewUserEntry } from "../../models";
+import { NewUserEntry } from '../../models';
 
-const defaultAvatar = "https://pbs.twimg.com/profile_images/1377489034558181378/KYCqvZi7_400x400.jpg";
+const defaultAvatar = 'https://pbs.twimg.com/profile_images/1377489034558181378/KYCqvZi7_400x400.jpg';
 
 export const adaptUserFromSpotify = (userFromSpotify: any): NewUserEntry => {
 	return {

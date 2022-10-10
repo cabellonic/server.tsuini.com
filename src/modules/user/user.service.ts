@@ -1,7 +1,7 @@
-import { FindOptionsWhere } from "typeorm";
-import { AppDataSource } from "../../data-source";
+import { FindOptionsWhere } from 'typeorm';
+import { AppDataSource } from '../../data-source';
 // Models
-import { NewUserEntry, User } from "../../models";
+import { NewUserEntry, User } from '../../models';
 
 const userRepository = AppDataSource.getRepository(User);
 

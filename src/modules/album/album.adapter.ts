@@ -1,4 +1,4 @@
-import { NewAlbumEntry } from "../../models";
+import { NewAlbumEntry } from '../../models';
 
 export const adaptAlbumFromSpotify = (albumFromSpotify: any): NewAlbumEntry => {
 	return {

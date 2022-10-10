@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
 type PropsAxiosConfig = {
 	withSpotifyAuth?: boolean;
@@ -17,7 +17,7 @@ export const getAxiosConfig = ({
 		password: process.env.SPOTIFY_CLIENT_SECRET,
 	};
 	const headers = {
-		"Content-Type": urlEncoded ? "application/x-www-form-urlencoded" : "application/json",
+		'Content-Type': urlEncoded ? 'application/x-www-form-urlencoded' : 'application/json',
 		Authorization,
 	};
 

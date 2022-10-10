@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 // Services
-import * as playerService from "./player.service";
+import * as playerService from './player.service';
 
 export const getPlaybackState = async (req: Request, res: Response, _next: NextFunction) => {
 	const accessToken = req.session.tokens.access_token;

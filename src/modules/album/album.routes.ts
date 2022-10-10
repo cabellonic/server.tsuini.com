@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express';
 // Services
-import * as albumController from "./album.controller";
+import * as albumController from './album.controller';
 
 const router = express.Router();
 
-router.get("/", albumController.getAlbums);
-router.get("/:id", albumController.getAlbumByID);
+router.get('/', albumController.getAlbums);
+router.get('/:id', albumController.getAlbumByID);
 
 export default router;

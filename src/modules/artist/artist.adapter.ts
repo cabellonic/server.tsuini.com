@@ -1,4 +1,4 @@
-import { NewArtistEntry } from "../../models";
+import { NewArtistEntry } from '../../models';
 
 export const adaptArtistFromSpotify = (data: any): NewArtistEntry => {
 	return {

@@ -1,13 +1,13 @@
-import express from "express";
+import express from 'express';
 // Controllers
-import * as authController from "./auth.controller";
+import * as authController from './auth.controller';
 
 const router = express.Router();
 
-router.get("/login", authController.login);
-router.get("/callback", authController.authCallback);
-router.get("/me", authController.getMe);
-router.get("/logout", authController.logout);
-router.get("/refresh", authController.refresh);
+router.get('/login', authController.login);
+router.get('/callback', authController.authCallback);
+router.get('/me', authController.getMe);
+router.get('/logout', authController.logout);
+router.get('/refresh', authController.refresh);
 
 export default router;
