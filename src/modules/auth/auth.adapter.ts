@@ -4,7 +4,7 @@ const defaultAvatar = 'https://pbs.twimg.com/profile_images/1377489034558181378/
 
 export const adaptUserFromSpotify = (userFromSpotify: any): NewUserEntry => {
 	return {
-		spotifyId: userFromSpotify.id,
+		id: userFromSpotify.id,
 		country: userFromSpotify.country,
 		username: userFromSpotify.id,
 		displayName: userFromSpotify.display_name || userFromSpotify.email,
