@@ -1,12 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
-	@PrimaryGeneratedColumn('uuid')
+	@PrimaryColumn({ unique: true })
 	id: string;
-
-	@Column({ unique: true })
-	spotifyId: string;
 
 	@Column({ unique: true })
 	username: string;
@@ -46,4 +43,4 @@ export class User {
 	deleted_at?: Date;
 }
 
-export type NewUserEntry = Omit<User, 'id' | 'created_at' | 'updated_at'>;
+export type NewUserEntry = Omit<User, 'created_at' | 'updated_at' | 'deleted_at'>;
