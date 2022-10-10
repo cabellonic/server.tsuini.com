@@ -57,23 +57,19 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 		redirect_uri: process.env.SPOTIFY_CALLBACK_URL,
 	});
 
-	try {
-		const response = await axios.post(authConfig.SPOTIFY_TOKEN_URL, data, config);
-		const { access_token, refresh_token, expires_in } = response.data;
+	const response = await axios.post(authConfig.SPOTIFY_TOKEN_URL, data, config);
+	const { access_token, refresh_token, expires_in } = response.data;
 
-		const userFromSpotify = await authService.getUserFromSpotify(access_token);
-		let userFromDB = await userService.getUserByCriteria({ spotifyId: userFromSpotify.spotifyId });
-		if (!userFromDB) userFromDB = await userService.createUser(userFromSpotify);
+	const userFromSpotify = await authService.getUserFromSpotify(access_token);
+	let userFromDB = await userService.getUserByCriteria({ spotifyId: userFromSpotify.spotifyId });
+	if (!userFromDB) userFromDB = await userService.createUser(userFromSpotify);
 
-		req.session.user = userFromDB;
-		req.session.tokens = {
-			access_token,
-			refresh_token,
-			expires_in,
-		};
-	} catch (error) {
-		console.log(error);
-	}
+	req.session.user = userFromDB;
+	req.session.tokens = {
+		access_token,
+		refresh_token,
+		expires_in,
+	};
 
 	return res.redirect(process.env.CLIENT_URL!);
 };
@@ -89,15 +85,10 @@ export const refresh = async (req: Request, res: Response, _next: NextFunction) 
 		refresh_token: refresh_token,
 	});
 
-	try {
-		const response = await axios.post(authConfig.SPOTIFY_TOKEN_URL, data, config);
-		const { access_token, expires_in } = response.data;
-		req.session.tokens.access_token = access_token;
-		req.session.tokens.expires_in = expires_in;
+	const response = await axios.post(authConfig.SPOTIFY_TOKEN_URL, data, config);
+	const { access_token, expires_in } = response.data;
+	req.session.tokens.access_token = access_token;
+	req.session.tokens.expires_in = expires_in;
 
-		return res.json({ accessToken: access_token, expirationDate: Date.now() + expires_in * 1000 });
-	} catch (error) {
-		console.log(error);
-		return res.redirect('/error/state_mismatch');
-	}
+	return res.json({ accessToken: access_token, expirationDate: Date.now() + expires_in * 1000 });
 };

@@ -46,12 +46,8 @@ export const setPlaybackPrevious = async (req: Request, res: Response, _next: Ne
 
 export const setPlaybackSeek = async (req: Request, res: Response, _next: NextFunction) => {
 	const accessToken = req.session.tokens.access_token;
-	try {
-		const playerState = await playerService.setPlaybackSeek(accessToken, req.body);
-		return res.json(playerState);
-	} catch (error) {
-		return res.status(400).json(error);
-	}
+	const playerState = await playerService.setPlaybackSeek(accessToken, req.body);
+	return res.json(playerState);
 };
 
 export const setPlaybackShuffle = async (req: Request, res: Response, _next: NextFunction) => {
@@ -67,11 +63,7 @@ export const setPlaybackVolume = async (req: Request, res: Response, _next: Next
 };
 
 export const getPlaybackDevices = async (req: Request, res: Response, _next: NextFunction) => {
-	try {
-		const accessToken = req.session.tokens.access_token;
-		const playerState = await playerService.getPlaybackDevices(accessToken);
-		return res.json(playerState);
-	} catch (err) {
-		console.log(err);
-	}
+	const accessToken = req.session.tokens.access_token;
+	const playerState = await playerService.getPlaybackDevices(accessToken);
+	return res.json(playerState);
 };
