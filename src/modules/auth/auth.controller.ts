@@ -9,7 +9,9 @@ import * as userService from '../user/user.service';
 import * as utils from '../../utils';
 
 export const getMe = async (req: Request, res: Response, _next: NextFunction) => {
-	const user = req.session.user;
+	const user_id = req.session.user_id;
+	if (!user_id) return res.end();
+	const user = await userService.getUserByID(user_id);
 	if (user) return res.json(user);
 	return res.end();
 };
@@ -45,7 +47,7 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 	const code = (req.query.code as string) || null;
 	const storedState = req.cookies?.[authConfig.STATE_KEY];
 
-	if (!state || !code || state !== storedState) return res.redirect('/error/state_mismatch');
+	if (!state || !code || state !== storedState) throw new Error('Invalid state or code');
 
 	res.clearCookie(authConfig.STATE_KEY);
 
@@ -61,10 +63,10 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 	const { access_token, refresh_token, expires_in } = response.data;
 
 	const userFromSpotify = await authService.getUserFromSpotify(access_token);
-	let userFromDB = await userService.getUserByCriteria({ spotifyId: userFromSpotify.spotifyId });
+	let userFromDB = await userService.getUserByID(userFromSpotify.id);
 	if (!userFromDB) userFromDB = await userService.createUser(userFromSpotify);
 
-	req.session.user = userFromDB;
+	req.session.user_id = userFromSpotify.id;
 	req.session.tokens = {
 		access_token,
 		refresh_token,
@@ -76,7 +78,7 @@ export const authCallback = async (req: Request, res: Response, _next: NextFunct
 
 export const refresh = async (req: Request, res: Response, _next: NextFunction) => {
 	const refresh_token = req.session.tokens?.refresh_token;
-	if (!refresh_token) return res.redirect('/error/state_mismatch');
+	if (!refresh_token) throw new Error('No refresh token');
 
 	const config = utils.getAxiosConfig({ withSpotifyAuth: true, urlEncoded: true });
 
