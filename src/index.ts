@@ -13,6 +13,8 @@ import songRoutes from './modules/song/song.routes';
 import albumRoutes from './modules/album/album.routes';
 import artistRoutes from './modules/artist/artist.routes';
 import playerRoutes from './modules/player/player.routes';
+// Middlewares
+import * as middlewares from './middlewares';
 
 // Models
 import { Session } from './models';
@@ -55,5 +57,7 @@ app.use('/api/songs', songRoutes);
 app.use('/api/albums', albumRoutes);
 app.use('/api/artists', artistRoutes);
 app.use('/api/player', playerRoutes);
+
+app.use(middlewares.errorHandler);
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT || 3000}`));
