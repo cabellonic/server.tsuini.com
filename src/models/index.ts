@@ -4,3 +4,4 @@ export * from '../modules/song/song.model';
 export * from '../modules/album/album.model';
 export * from '../modules/artist/artist.model';
 export * from '../modules/player/player.model';
+export * from '../modules/language/language.model';
