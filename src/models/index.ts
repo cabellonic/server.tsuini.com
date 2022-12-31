@@ -5,3 +5,4 @@ export * from '../modules/album/album.model';
 export * from '../modules/artist/artist.model';
 export * from '../modules/player/player.model';
 export * from '../modules/language/language.model';
+export * from '../modules/translation/translation.model';
