@@ -5,8 +5,8 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	DeleteDateColumn,
-	OneToOne,
 	JoinColumn,
+	ManyToOne,
 } from 'typeorm';
 import { Language } from '../../models';
 
@@ -18,15 +18,15 @@ export class Translation {
 	@Column()
 	name: string;
 
-	@Column({ unique: true })
+	@Column({ nullable: true })
 	description: string;
+
+	@ManyToOne(() => Language, { nullable: false })
+	@JoinColumn()
+	language: Language;
 
 	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;
-
-	@OneToOne(() => Language)
-	@JoinColumn()
-	language: Language;
 
 	@UpdateDateColumn({
 		type: 'timestamp',
