@@ -1,4 +1,14 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryColumn,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+	DeleteDateColumn,
+	ManyToMany,
+	JoinTable,
+} from 'typeorm';
+import { Translation } from '../translation/translation.model';
 
 @Entity()
 export class User {
@@ -29,6 +39,10 @@ export class User {
 	@Column()
 	country?: string;
 
+	@ManyToMany(() => Translation, translation => translation.translators)
+	@JoinTable()
+	translations: Array<Translation>;
+
 	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;
 
@@ -43,4 +57,4 @@ export class User {
 	deleted_at?: Date;
 }
 
-export type NewUserEntry = Omit<User, 'created_at' | 'updated_at' | 'deleted_at'>;
+export type NewUserEntry = Omit<User, 'created_at' | 'updated_at' | 'deleted_at' | 'translations'>;

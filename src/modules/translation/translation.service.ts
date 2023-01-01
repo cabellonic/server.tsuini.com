@@ -5,19 +5,25 @@ import { NewTranslationEntry, Translation } from '../../models';
 const translationRepository = AppDataSource.getRepository(Translation);
 
 export const getTranslationByID = async (id: string) => {
-	const translation = await translationRepository.findOne({ where: { id } });
+	const translation = await translationRepository.findOne({
+		where: { id },
+		relations: { translators: true, language: true },
+	});
 	return translation;
 };
 
 export const getTranslations = async () => {
-	const translations = await translationRepository.find({ relations: { language: true } });
+	const translations = await translationRepository.find({ relations: { translators: true, language: true } });
 	return translations;
 };
 
 export const getTranslationsByCriteria = async (
-	criteria: FindOptionsWhere<Translation> | FindOptionsWhere<Translation>[],
+	criteria: FindOptionsWhere<Translation> | Array<FindOptionsWhere<Translation>>,
 ) => {
-	const translations = await translationRepository.find({ where: criteria, relations: { language: true } });
+	const translations = await translationRepository.find({
+		where: criteria,
+		relations: { translators: true, language: true },
+	});
 	return translations;
 };
 

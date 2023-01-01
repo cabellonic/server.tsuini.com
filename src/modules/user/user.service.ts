@@ -6,12 +6,12 @@ import { NewUserEntry, User } from '../../models';
 const userRepository = AppDataSource.getRepository(User);
 
 export const getUserByID = async (id: string) => {
-	const user = await userRepository.findOne({ where: { id } });
+	const user = await userRepository.findOne({ where: { id }, relations: { translations: true } });
 	return user;
 };
 
-export const getUserByCriteria = async (criteria: FindOptionsWhere<User> | FindOptionsWhere<User>[]) => {
-	const user = await userRepository.findOne({ where: criteria });
+export const getUserByCriteria = async (criteria: FindOptionsWhere<User> | Array<FindOptionsWhere<User>>) => {
+	const user = await userRepository.findOne({ where: criteria, relations: { translations: true } });
 	return user;
 };
 
@@ -20,8 +20,8 @@ export const getUsers = async () => {
 	return users;
 };
 
-export const getUsersByCriteria = async (criteria: FindOptionsWhere<User> | FindOptionsWhere<User>[]) => {
-	const user = await userRepository.find({ where: criteria });
+export const getUsersByCriteria = async (criteria: FindOptionsWhere<User> | Array<FindOptionsWhere<User>>) => {
+	const user = await userRepository.find({ where: criteria, relations: { translations: true } });
 	return user;
 };
 
