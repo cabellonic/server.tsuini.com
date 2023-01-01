@@ -16,12 +16,18 @@ export const getArtists = async () => {
 };
 
 export const getArtistByID = async (id: string) => {
-	const artist = await artistRepository.findOne({ where: { id } });
+	const artist = await artistRepository.findOne({
+		where: { id },
+		relations: { albums: true, songs: true, translations: true, uploader: true },
+	});
 	return artist;
 };
 
-export const getArtistsByCriteria = async (criteria: FindOptionsWhere<Artist> | FindOptionsWhere<Artist>[]) => {
-	const artists = await artistRepository.find({ where: criteria });
+export const getArtistsByCriteria = async (criteria: FindOptionsWhere<Artist> | Array<FindOptionsWhere<Artist>>) => {
+	const artists = await artistRepository.find({
+		where: criteria,
+		relations: { albums: true, songs: true, translations: true, uploader: true },
+	});
 	return artists;
 };
 

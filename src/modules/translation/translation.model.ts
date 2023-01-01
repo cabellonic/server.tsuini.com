@@ -1,14 +1,15 @@
 import {
-	Entity,
-	PrimaryGeneratedColumn,
 	Column,
 	CreateDateColumn,
-	UpdateDateColumn,
 	DeleteDateColumn,
+	Entity,
 	JoinColumn,
+	ManyToMany,
 	ManyToOne,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
 } from 'typeorm';
-import { Language } from '../../models';
+import { Language, User } from '../../models';
 
 @Entity()
 export class Translation {
@@ -24,6 +25,9 @@ export class Translation {
 	@ManyToOne(() => Language, { nullable: false })
 	@JoinColumn()
 	language: Language;
+
+	@ManyToMany(() => User, user => user.translations, { nullable: false })
+	translators: Array<User>;
 
 	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;

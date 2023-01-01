@@ -1,4 +1,20 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryColumn,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+	DeleteDateColumn,
+	ManyToMany,
+	JoinTable,
+	ManyToOne,
+	JoinColumn,
+	OneToMany,
+} from 'typeorm';
+import { Artist } from '../artist/artist.model';
+import { Song } from '../song/song.model';
+import { Translation } from '../translation/translation.model';
+import { User } from '../user/user.model';
 
 @Entity()
 export class Album {
@@ -26,6 +42,20 @@ export class Album {
 	@Column()
 	releaseDate: string;
 
+	@ManyToMany(() => Artist, artist => artist.albums, { nullable: false })
+	artists: Array<Artist>;
+
+	@OneToMany(() => Song, song => song.album)
+	songs: Array<Song>;
+
+	@ManyToMany(() => Translation)
+	@JoinTable()
+	translations: Array<Translation>;
+
+	@ManyToOne(() => User, { nullable: false })
+	@JoinColumn()
+	uploader: User;
+
 	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;
 
@@ -40,4 +70,7 @@ export class Album {
 	deleted_at?: Date;
 }
 
-export type NewAlbumEntry = Omit<Album, 'created_at' | 'updated_at'>;
+export type NewAlbumEntry = Omit<
+	Album,
+	'created_at' | 'updated_at' | 'artists' | 'translations' | 'uploader' | 'songs'
+>;
