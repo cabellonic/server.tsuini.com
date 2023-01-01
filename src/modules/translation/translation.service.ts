@@ -10,14 +10,14 @@ export const getTranslationByID = async (id: string) => {
 };
 
 export const getTranslations = async () => {
-	const translations = await translationRepository.find();
+	const translations = await translationRepository.find({ relations: { language: true } });
 	return translations;
 };
 
 export const getTranslationsByCriteria = async (
 	criteria: FindOptionsWhere<Translation> | FindOptionsWhere<Translation>[],
 ) => {
-	const translations = await translationRepository.find({ where: criteria });
+	const translations = await translationRepository.find({ where: criteria, relations: { language: true } });
 	return translations;
 };
 
