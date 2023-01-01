@@ -14,6 +14,7 @@ import albumRoutes from './modules/album/album.routes';
 import artistRoutes from './modules/artist/artist.routes';
 import playerRoutes from './modules/player/player.routes';
 import languageRoutes from './modules/language/language.routes';
+import translationRoutes from './modules/translation/translation.routes';
 // Middlewares
 import * as middlewares from './middlewares';
 
@@ -59,6 +60,7 @@ app.use('/api/albums', albumRoutes);
 app.use('/api/artists', artistRoutes);
 app.use('/api/player', playerRoutes);
 app.use('/api/languages', languageRoutes);
+app.use('/api/translations', translationRoutes);
 
 app.use(middlewares.errorHandler);
 
