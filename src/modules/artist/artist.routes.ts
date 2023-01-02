@@ -8,5 +8,7 @@ const router = express.Router();
 
 router.get('/', catchAsyncErrors(artistController.getArtists));
 router.get('/:id', catchAsyncErrors(artistController.getArtistByID));
+router.get('/spotify/:id', catchAsyncErrors(artistController.getArtistFromSpotify));
+router.post('/', catchAsyncErrors(artistController.createArtist));
 
 export default router;
