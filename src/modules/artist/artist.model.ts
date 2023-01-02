@@ -61,5 +61,5 @@ export class Artist {
 
 export type NewArtistEntry = Omit<
 	Artist,
-	'created_at' | 'updated_at' | 'deleted_at' | 'albums' | 'songs' | 'translations' | 'uploader'
+	'created_at' | 'updated_at' | 'deleted_at' | 'albums' | 'songs' | 'translations'
 >;
