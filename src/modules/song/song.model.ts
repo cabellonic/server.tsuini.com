@@ -63,7 +63,4 @@ export class Song {
 	deleted_at: Date;
 }
 
-export type NewSongEntry = Omit<
-	Song,
-	'created_at' | 'updated_at' | 'deleted_at' | 'artists' | 'album' | 'translations' | 'uploader'
->;
+export type NewSongEntry = Omit<Song, 'created_at' | 'updated_at' | 'deleted_at' | 'translations'>;
