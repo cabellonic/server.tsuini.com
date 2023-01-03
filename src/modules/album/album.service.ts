@@ -11,19 +11,24 @@ import * as utils from '../../utils';
 const albumRepository = AppDataSource.getRepository(Album);
 
 export const getAlbums = async () => {
-	const albums = await albumRepository.find({ relations: { artists: true, songs: true, translations: true } });
+	const albums = await albumRepository.find({
+		relations: { uploader: true, artists: true, songs: true, translations: true },
+	});
 	return albums;
 };
 
 export const getAlbumByID = async (id: string) => {
-	const album = await albumRepository.findOne({ where: { id } });
+	const album = await albumRepository.findOne({
+		where: { id },
+		relations: { uploader: true, artists: true, songs: true, translations: true },
+	});
 	return album;
 };
 
 export const getAlbumsByCriteria = async (criteria: FindOptionsWhere<Album> | Array<FindOptionsWhere<Album>>) => {
 	const albums = await albumRepository.find({
 		where: criteria,
-		relations: { artists: true, songs: true, translations: true },
+		relations: { uploader: true, artists: true, songs: true, translations: true },
 	});
 	return albums;
 };
