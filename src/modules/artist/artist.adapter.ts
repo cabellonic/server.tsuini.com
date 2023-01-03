@@ -6,5 +6,6 @@ export const adaptArtistFromSpotify = (data: any): NewArtistEntry => {
 		name: data.name,
 		avatar: data.images[0]?.url,
 		spotifyUrl: data.external_urls.spotify,
+		uploader: null,
 	};
 };
