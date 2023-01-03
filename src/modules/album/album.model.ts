@@ -25,6 +25,9 @@ export class Album {
 	name: string;
 
 	@Column()
+	completed: boolean;
+
+	@Column()
 	spotifyUrl: string;
 
 	@Column()
@@ -70,7 +73,4 @@ export class Album {
 	deleted_at?: Date;
 }
 
-export type NewAlbumEntry = Omit<
-	Album,
-	'created_at' | 'updated_at' | 'artists' | 'translations' | 'uploader' | 'songs'
->;
+export type NewAlbumEntry = Omit<Album, 'created_at' | 'updated_at' | 'translations' | 'songs'>;
