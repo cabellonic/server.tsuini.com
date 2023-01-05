@@ -16,7 +16,7 @@ export const setPlaybackDevice = async (req: Request, res: Response, _next: Next
 
 export const setPlaybackPlay = async (req: Request, res: Response, _next: NextFunction) => {
 	const accessToken = req.session.tokens.access_token;
-	const playerState = await playerService.setPlaybackPlay(accessToken);
+	const playerState = await playerService.setPlaybackPlay(accessToken, req.body);
 	return res.json(playerState);
 };
 

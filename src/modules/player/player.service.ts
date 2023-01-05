@@ -17,9 +17,9 @@ export const setPlaybackDevice = async (accessToken: string, body: any): Promise
 	await axios.put(`${playerConfig.PLAYER_API_URI}`, body, config);
 };
 
-export const setPlaybackPlay = async (accessToken: string): Promise<void> => {
+export const setPlaybackPlay = async (accessToken: string, context: any = {}): Promise<void> => {
 	const config = utils.getAxiosConfig({ accessToken });
-	await axios.put(`${playerConfig.PLAYER_API_URI}/play`, new URLSearchParams({}), config);
+	await axios.put(`${playerConfig.PLAYER_API_URI}/play`, context, config);
 };
 
 export const setPlaybackPause = async (accessToken: string): Promise<void> => {
