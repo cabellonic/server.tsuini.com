@@ -18,7 +18,7 @@ export const getArtists = async () => {
 export const getArtistByID = async (id: string) => {
 	const artist = await artistRepository.findOne({
 		where: { id },
-		relations: { albums: true, songs: true, translations: true, uploader: true },
+		relations: { albums: true, translations: true, uploader: true },
 	});
 	return artist;
 };
@@ -26,14 +26,9 @@ export const getArtistByID = async (id: string) => {
 export const getArtistsByCriteria = async (criteria: FindOptionsWhere<Artist> | Array<FindOptionsWhere<Artist>>) => {
 	const artists = await artistRepository.find({
 		where: criteria,
-		relations: { albums: true, songs: true, translations: true, uploader: true },
+		relations: { albums: true, translations: true, uploader: true },
 	});
 	return artists;
-};
-
-export const createArtist = async (artist: NewArtistEntry) => {
-	const newArtist = await artistRepository.save(artist);
-	return newArtist;
 };
 
 export const getArtistFromSpotify = async (accessToken: string, id: string) => {
@@ -41,4 +36,9 @@ export const getArtistFromSpotify = async (accessToken: string, id: string) => {
 
 	const { data } = await axios.get(`https://api.spotify.com/v1/artists/${id}`, config);
 	return artistAdapter.adaptArtistFromSpotify(data);
+};
+
+export const createArtist = async (artist: NewArtistEntry) => {
+	const newArtist = await artistRepository.save(artist);
+	return newArtist;
 };
