@@ -12,7 +12,7 @@ const albumRepository = AppDataSource.getRepository(Album);
 
 export const getAlbums = async () => {
 	const albums = await albumRepository.find({
-		relations: { uploader: true, artists: true, songs: true, translations: true },
+		relations: { uploader: true, artists: true, songs: { uploader: true }, translations: true },
 	});
 	return albums;
 };
@@ -20,7 +20,7 @@ export const getAlbums = async () => {
 export const getAlbumByID = async (id: string) => {
 	const album = await albumRepository.findOne({
 		where: { id },
-		relations: { uploader: true, artists: true, songs: true, translations: true },
+		relations: { uploader: true, artists: true, songs: { uploader: true }, translations: true },
 	});
 	return album;
 };

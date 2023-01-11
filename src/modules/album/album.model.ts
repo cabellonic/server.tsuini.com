@@ -24,7 +24,7 @@ export class Album {
 	@Column()
 	name: string;
 
-	@Column()
+	@Column({ default: false })
 	completed: boolean;
 
 	@Column()
@@ -39,7 +39,7 @@ export class Album {
 	@Column()
 	href: string;
 
-	@Column()
+	@Column({ default: '/album.png' })
 	image: string;
 
 	@Column()
@@ -73,4 +73,4 @@ export class Album {
 	deleted_at?: Date;
 }
 
-export type NewAlbumEntry = Omit<Album, 'created_at' | 'updated_at' | 'translations' | 'songs'>;
+export type NewAlbumEntry = Omit<Album, 'created_at' | 'updated_at' | 'translations'>;
