@@ -10,5 +10,6 @@ router.get('/', catchAsyncErrors(songService.getSongs));
 router.get('/:id', catchAsyncErrors(songService.getSongByID));
 router.get('/spotify/:id', catchAsyncErrors(songService.getSongFromSpotify));
 router.post('/', catchAsyncErrors(songService.createSong));
+router.post('/zero', catchAsyncErrors(songService.createSongFromZero));
 
 export default router;
