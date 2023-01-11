@@ -23,7 +23,7 @@ export class Artist {
 	@Column()
 	name: string;
 
-	@Column()
+	@Column({ default: '/avatar.png' })
 	avatar?: string;
 
 	@Column()
@@ -59,7 +59,4 @@ export class Artist {
 	deleted_at?: Date;
 }
 
-export type NewArtistEntry = Omit<
-	Artist,
-	'created_at' | 'updated_at' | 'deleted_at' | 'albums' | 'songs' | 'translations'
->;
+export type NewArtistEntry = Omit<Artist, 'created_at' | 'updated_at' | 'deleted_at' | 'songs' | 'translations'>;
