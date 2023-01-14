@@ -6,11 +6,7 @@ type PropsAxiosConfig = {
 	urlEncoded?: boolean;
 };
 
-export const getAxiosConfig = ({
-	withSpotifyAuth,
-	accessToken,
-	urlEncoded,
-}: PropsAxiosConfig): AxiosRequestConfig<URLSearchParams> => {
+export const getAxiosConfig = ({ withSpotifyAuth, accessToken, urlEncoded }: PropsAxiosConfig) => {
 	const Authorization = accessToken ? `Bearer ${accessToken}` : undefined;
 	const auth = withSpotifyAuth && {
 		username: process.env.SPOTIFY_CLIENT_ID,
