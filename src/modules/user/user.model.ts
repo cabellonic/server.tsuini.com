@@ -7,8 +7,10 @@ import {
 	DeleteDateColumn,
 	ManyToMany,
 	JoinTable,
+	ManyToOne,
 } from 'typeorm';
 import { Translation } from '../translation/translation.model';
+import { Rank } from '../rank/rank.model';
 
 @Entity()
 export class User {
@@ -20,9 +22,6 @@ export class User {
 
 	@Column({ unique: true })
 	email: string;
-
-	@Column({ default: 2 })
-	rank: number;
 
 	@Column()
 	displayName: string;
@@ -42,6 +41,10 @@ export class User {
 	@ManyToMany(() => Translation, translation => translation.translators)
 	@JoinTable()
 	translations: Array<Translation>;
+
+	@ManyToOne(() => Rank, rank => rank.users)
+	@JoinTable()
+	rank: Rank;
 
 	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
 	created_at: Date;

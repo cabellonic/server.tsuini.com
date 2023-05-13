@@ -17,6 +17,7 @@ import languageRoutes from './modules/language/language.routes';
 import translationRoutes from './modules/translation/translation.routes';
 import lyricRoutes from './modules/lyric/lyric.routes';
 import playlistRoutes from './modules/playlist/playlist.routes';
+import rankRoutes from './modules/rank/rank.routes';
 // Middlewares
 import * as middlewares from './middlewares';
 // Models
@@ -64,6 +65,7 @@ app.use('/api/languages', languageRoutes);
 app.use('/api/translations', translationRoutes);
 app.use('/api/lyrics', lyricRoutes);
 app.use('/api/playlists', playlistRoutes);
+app.use('/api/ranks', rankRoutes);
 
 app.use(middlewares.errorHandler);
 

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 // Entities
-import { User, Session, Song, Album, Artist, Language, Translation, Lyric } from './models';
+import { User, Session, Song, Album, Artist, Language, Translation, Lyric, Rank } from './models';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
 	database: process.env.DB_DATABASE,
 	synchronize: true,
 	logging: false,
-	entities: [User, Song, Album, Artist, Session, Language, Translation, Lyric],
+	entities: [User, Song, Album, Artist, Session, Language, Translation, Lyric, Rank],
 	migrations: [],
 	subscribers: [],
 });

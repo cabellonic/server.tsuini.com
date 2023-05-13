@@ -12,6 +12,6 @@ export const adaptUserFromSpotify = (userFromSpotify: any): NewUserEntry => {
 		avatar: userFromSpotify.images?.[0]?.url || defaultAvatar,
 		profileUrl: userFromSpotify.external_urls.spotify,
 		spotifyPlan: userFromSpotify.product,
-		rank: 2,
+		rank: null,
 	};
 };
