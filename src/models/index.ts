@@ -8,3 +8,4 @@ export * from '../modules/session/session.model';
 export * from '../modules/song/song.model';
 export * from '../modules/translation/translation.model';
 export * from '../modules/user/user.model';
+export * from '../modules/rank/rank.model';
